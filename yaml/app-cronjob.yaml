@@ -1,0 +1,20 @@
+
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: app-cronjob
+  namespace: default
+spec:
+  schedule: "*/5 * * * *"  # Runs every 5 minutes
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: app-container
+            image: your-image:latest
+            args:
+            - /bin/sh
+            - -c
+            - "echo Hello from the CronJob!"
+          restartPolicy: OnFailure
